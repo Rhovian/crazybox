@@ -2,7 +2,7 @@
 [workspace]
 members = [
     "sim",      # Bevy/Rapier physics simulation
-    "ros2",     # ROS2 node implementation
+    "ros",     # ROS2 node implementation
     "types",    # Shared types and constants
     "control",  # Control algorithms and state management
 ]
