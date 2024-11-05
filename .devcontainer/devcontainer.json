@@ -1,0 +1,49 @@
+{
+    "name": "ROS 2 Development",
+    "dockerFile": "../Dockerfile",
+    "runArgs": [
+        "--privileged",
+        "--network=host",
+        "--volume=/dev:/dev",
+        "-e", "DISPLAY=host.docker.internal:0",
+        "-v", "/private/tmp/.X11-unix:/tmp/.X11-unix:rw",
+        "-v", "/Users/j/.Xauthority:/root/.Xauthority:rw"
+    ],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind"
+    ],
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "tamasfe.even-better-toml",
+                "serayuzgur.crates",
+                "ms-vscode.cpptools",
+                "ms-python.python",
+                "ms-vscode.cmake-tools"
+            ],
+            "settings": {
+                "rust-analyzer.checkOnSave.command": "clippy",
+                "rust-analyzer.server.extraEnv": {
+                    "ROS_DISTRO": "humble",
+                    "AMENT_PREFIX_PATH": "/opt/ros/humble",
+                    "CMAKE_PREFIX_PATH": "/opt/ros/humble",
+                    "COLCON_PREFIX_PATH": "/opt/ros/humble",
+                    "LD_LIBRARY_PATH": "/opt/ros/humble/lib",
+                    "PATH": "/opt/ros/humble/bin:${env:PATH}"
+                }
+            }
+        }
+    },
+    "remoteUser": "root",
+    "postCreateCommand": "bash -c 'source /opt/ros/humble/setup.bash && echo \"source /opt/ros/humble/setup.bash\" >> ~/.bashrc'",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true,
+            "installOhMyZsh": true
+        },
+        "ghcr.io/devcontainers/features/git:1": "latest"
+    }
+}
